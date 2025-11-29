@@ -1,16 +1,19 @@
 class Solution {
 public:
     int wiggleMaxLength(vector<int>& nums) {
-          if(nums.size() < 2) return nums.size();
-        int up=1,down=1;
+         if(nums.size() < 2) return nums.size();
+        int count=1;int dir=0;
         for(int i=1;i<nums.size();i++){
-            if(nums[i]>nums[i-1]){
-           up=down+1;
-            }
-            else if(nums[i]<nums[i-1]){
-                down=up+1;
-            }  
+            int ans=nums[i-1]-nums[i];
+            if(ans>0&&dir<=0){
+            count++;
+            dir=1;//direction is up
         }
-        return max(up,down);
+        else if(ans<0&& dir>=0){
+            count++;
+            dir=-1;
+        }
+        }
+        return count;
     }
 };
