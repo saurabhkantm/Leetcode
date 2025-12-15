@@ -2,19 +2,18 @@ class Solution {
 public:
     long long getDescentPeriods(vector<int>& prices) {
         int n=prices.size();
-        long long count=0,previous;
-        long long length=0;
-        for(int i=0;i<n;i++){
-            if(i>0&&prices[i]==previous-1){
-               length++;
-            }
-            else{
-                length=1;
-            }
-           count+=length;
-            previous=prices[i];
+       long long count=1;
+         long long ans=1;
+       for(int i=1;i<n;i++){
+        if(prices[i]==prices[i-1]-1){
+         count++;
         }
-        return count;
+        else{
+            count=1;
+        }
+        ans+=count;
+       }
+        return ans;
     }
 
 };
