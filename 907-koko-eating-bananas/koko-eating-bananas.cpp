@@ -5,7 +5,6 @@ public:
         long long int hours = 0;
         for(int i=0;i<n;i++){
             hours = (long long)hours +  (long long)(piles[i] + k - 1) / k;
-            
         }
         return hours;
     }
@@ -13,7 +12,7 @@ public:
         int maxi = *max_element(piles.begin(),piles.end());
         int l = 1;
         int r = maxi;
-        int ans = -1;
+        int ans = -1;              //O(nlog(max value of range));
         while(l<=r){
             int mid = l + (r-l)/2;
             if(check(mid,piles)<=h){
