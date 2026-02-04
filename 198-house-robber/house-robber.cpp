@@ -1,15 +1,15 @@
 class Solution {
 public:
-int solve(int idx,vector<int>&nums,vector<int>&dp){
-   // int n=nums.size();
-    //base case
-    if(idx>=nums.size()) return 0;
-    if(dp[idx]!=-1) return dp[idx];
-    //not take
-    int nottake=solve(idx+1,nums,dp);
-    //take
-    int take=nums[idx]+solve(idx+2,nums,dp);
-    return dp[idx]=max(take,nottake);
+int solve(int i,vector<int>&nums,vector<int>&dp){
+    //base case 
+    if(i>=nums.size())
+    return 0;
+    if(dp[i]!=-1) return dp[i];
+    //pick
+     int pick=nums[i]+solve(i+2,nums,dp);
+    //not pick
+    int notpick= solve(i+1,nums,dp);
+    return dp[i]=max(pick,notpick);
 }
     int rob(vector<int>& nums) {
         int n=nums.size();
@@ -17,3 +17,7 @@ int solve(int idx,vector<int>&nums,vector<int>&dp){
         return solve(0,nums,dp);
     }
 };
+//1,2,3,1
+//pick: 1+3
+//notpick:2+1
+//mx(4,3)=4
