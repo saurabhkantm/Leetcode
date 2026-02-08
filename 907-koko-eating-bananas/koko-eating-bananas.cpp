@@ -1,26 +1,22 @@
 class Solution {
 public:
-    long long check(int k,vector<int>&piles){
-        int n = piles.size();
-        long long int hours = 0;
-        for(int i=0;i<n;i++){
-            hours = (long long)hours +  (long long)(piles[i] + k - 1) / k;
-        }
-        return hours;
+bool ispossible(int mid,vector<int>& piles,int h){
+    long long hours=0;
+    for(int i=0;i<piles.size();i++){
+    hours+=(long long) (piles[i]+mid-1)/mid;
     }
+    return hours<=h;
+}
     int minEatingSpeed(vector<int>& piles, int h) {
-        int maxi = *max_element(piles.begin(),piles.end());
-        int l = 1;
-        int r = maxi;
-        int ans = -1;              //O(nlog(max value of range));
-        while(l<=r){
-            int mid = l + (r-l)/2;
-            if(check(mid,piles)<=h){
-                ans = mid;
-                r = mid - 1;
+        int low=1,high=*max_element(piles.begin(),piles.end()),ans=-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(ispossible(mid,piles,h)){
+               ans=mid;
+               high=mid-1;
             }
             else{
-                l = mid + 1;
+                low=mid+1;
             }
         }
         return ans;
