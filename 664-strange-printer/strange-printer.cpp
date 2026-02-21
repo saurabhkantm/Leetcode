@@ -1,33 +1,32 @@
 class Solution {
 public:
-    int dp[102][102];
-    int fa(int i,int j,string& s){
-        if(i>j)
-        return 0;
-        if(dp[i][j]!=-1) 
-            return dp[i][j];        
-        int ans=INT_MAX;
-        for(int k=i;k<=j;k++){
-            int res=0;
-            int st=k;
-            while(s[k]==s[st])
-                k++;
-            if(st>i) 
-                res+=fa(i,st-1,s);
-            if(k<=j) 
-                res+=fa(k,j,s);
-            if(s[st]!=s[i-1]) 
-                res++;          
-            k--;
-            ans=min(ans,res);
+    int dp[101][101];
+    int solve( string &s , int l , int r)
+    {
+        if(l > r) return 0;
+        if(l == r) return 1;
+
+            if(dp[l][r] != -1)  return dp[l][r];
+
+        int ans = 1 + solve( s , l+1 , r ); // check the lenght for same character
+
+        for(int x = l+1 ; x <= r ; x++ )
+        {
+            if(s[x] == s[l])
+            {
+            int temp = solve(s,l+1 , x-1) + solve(s , x , r);
+
+            ans = min(ans, temp);}
         }
-        return dp[i][j]=ans;
+
+
+        return dp[l][r] = ans;
     }
     int strangePrinter(string s) {
-        memset(dp,-1,sizeof(dp));
-        int n=s.size();
-        s.insert(s.begin(),'0');
-        s+='0';
-        return fa(1,n,s);
+        int n = s.size();
+
+        memset(dp,-1,sizeof(dp));       
+
+        return solve(s,0,n-1);
     }
 };
