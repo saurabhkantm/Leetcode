@@ -1,15 +1,26 @@
 class Solution {
 public:
-    // 2 ^ k substring it can have of size k
     bool hasAllCodes(string s, int k) {
-        int n = s.size();
-        if(k>n) return false;
-        set<string>st; // it contain all unique substring 
-        for(int x = 0 ; x <= n-k ; x++ )
-        {
-            st.insert( s.substr( x,k ) );
+        int i=0;
+        map<int,int> mp;
+        while(i<s.size()){
+            if(i>=k-1){
+                int n=k-1;
+                int binary=0;
+                for(int j=i-k+1;j<=i;j++){
+                    // cout<<s[j]-48<<endl;
+                    binary+=((s[j]-48)*pow(2,n));
+                    n--;
+                }
+
+                
+                 mp[binary]=1;
+                 if(mp.size()==pow(2,k))return true;
+            }
+            i++;
         }
-        if(st.size() == pow(2,k) ) return true;
+        // for(auto it:mp)cout<<it.first<<" "<<it.second<<endl;
+        // if(mp.size()==pow(2,k))return true;
         return false;
     }
 };
