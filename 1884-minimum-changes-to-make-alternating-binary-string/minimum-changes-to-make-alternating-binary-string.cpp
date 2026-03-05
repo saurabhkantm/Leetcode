@@ -1,24 +1,27 @@
 class Solution {
 public:
     int minOperations(string s) {
+        //odd - 1
+        //even - 1
         int n = s.length();
-        int cnt0 = 0;
-        int cnt1 = 0;
-
-        for (int i = 0; i < n; i++) {
-            // pattern starts from 010101
-            char char0 = (i % 2) + '0';
-            // pattern starts from 101010
-            char char1 = (1 - i % 2) + '0';
-
-            if (s[i] != char0) {
-                cnt0++;
-            };
-            if (s[i] != char1) {
-                cnt1++;
-            };
+        int ans1 = 0;
+        for(int i=0;i<n;i++){
+            if(i%2!=0 && s[i]=='1'){
+                ans1++;
+            }
+            else if(i%2==0 && s[i]=='0'){
+                ans1++;
+            }
         }
-
-        return min(cnt1, cnt0);
+        int ans2 = 0;
+        for(int i=0;i<n;i++){
+            if(i%2!=0 && s[i]=='0'){
+                ans2++;
+            }
+            else if(i%2==0 && s[i]=='1'){
+                ans2++;
+            }
+        }
+        return min(ans1,ans2);  
     }
 };
