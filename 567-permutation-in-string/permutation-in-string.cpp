@@ -1,30 +1,31 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        vector<int>origFreq(26,0);
+        vector<int>freq1(26,0);
         for(int i=0;i<s1.length();i++){
-            origFreq[s1[i]-'a']++;
+            freq1[s1[i]-'a']++;
         }
+        vector<int>freq2(26,0);
         int l = 0;
         int r = 0;
         int n = s2.length();
-        vector<int>currFreq(26,0);
         while(r<n){
-            currFreq[s2[r]-'a']++;
+            freq2[s2[r]-'a']++;
+            if(r-l+1>s1.length()){
+                freq2[s2[l]-'a']--;
+                l++;
+            }
             if(r-l+1==s1.length()){
-                bool flag = true;
+                bool isValid = true;
+                
                 for(int i=0;i<26;i++){
-                    if(origFreq[i]!=currFreq[i]){
-                        flag = false;
+                    if(freq1[i]!=freq2[i]){
+                        isValid = false;
                         break;
                     }
                 }
-                if(flag){
+                if(isValid){
                     return true;
-                }
-                else{
-                    currFreq[s2[l]-'a']--;
-                    l++;
                 }
             }
             r++;
