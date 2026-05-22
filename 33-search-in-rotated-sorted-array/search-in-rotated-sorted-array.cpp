@@ -1,30 +1,43 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int l=0,h=nums.size()-1;
-        while(l<=h){
-            int mid=l+(h-l)/2;
-            if(nums[mid]==target){
+        int n = nums.size();
+  
+        int low = 0; 
+        int high = n-1;
+       
+
+        while(low<= high){
+           int mid = (low + high) / 2;
+           if( nums[mid] == target){
                 return mid;
-            }
-            else if(nums[l]<=nums[mid]){
-                if((nums[l]<=target)&&(target<nums[mid])){
-                    h=mid-1;
-                }
+
+           }
+ // if left part is sorted check with target if  exist in left or not and move low and high accordingly 
+           if(nums[low] <= nums[mid]){
+                if( target >= nums[low] && target <= nums[mid]){
+                    high = mid - 1;
+                } 
                 else{
-                    l=mid+1;
-                }
-            }
-        
-             else{
-                    if((nums[mid]<target)&&(target<=nums[h])){
-                        l=mid+1;
-                    }
-                    else{
-                        h=mid-1;
-                    }
-                }
+                    low = mid +1;
+                }    
+             }
+
+ // in this part check for element in right part neglecting the left part
+
+           else{
+                 if(target >= nums[mid] && target <= nums[high]){
+                  low = mid + 1;
+               }
+               else{
+                high = mid -1;
+               }
+
+             }
+         
         }
-            return -1;
-        }
+
+
+        return  -1;
+    }
 };
