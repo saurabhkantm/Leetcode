@@ -3,7 +3,7 @@ public:
     int removeDuplicates(vector<int>& nums) {
         int n=nums.size();
         int j=1;
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             if(nums[i]!=nums[j-1]){
                 nums[j]=nums[i];
                 j++;
@@ -12,10 +12,3 @@ public:
         return j;
     }
 };
-//Dry run
-//nums = [1,1,2]
-//[1,2] 2
-// nums = [0,0,1,1,1,2,2,3,3,4]
-//[0,1,2,3,4]= 5
-//k=5
-
