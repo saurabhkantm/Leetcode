@@ -1,12 +1,17 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if (head == nullptr || head->next == nullptr) {
-            return head;
-        }
-        ListNode* last = reverseList(head->next);
-        head->next->next = head;
-        head->next = nullptr;
-        return last;
+       vector<int>ans;
+       ListNode*curr=head;
+       while(curr){
+       ans.push_back(curr->val);
+       curr=curr->next;
+       }
+       curr=head;
+       for(int i=ans.size()-1;i>=0;i--){
+        curr->val=ans[i];
+        curr=curr->next;
+       }
+       return head;
     }
 };
