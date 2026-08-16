@@ -7,10 +7,12 @@ public:
         if (dp[i] != -1)
             return dp[i];
         int maxi = 0;
+        int len=0;
         int ans = 0;
         for (int j = i; j < min(n, i + k); j++) {
+            len++;
             maxi = max(maxi, arr[j]);
-            int len = j - i + 1;
+            //int len = j - i + 1;
             int sum = maxi * len + solve(j + 1, arr, k, dp);
             ans = max(ans, sum);
         }
